@@ -1,0 +1,40 @@
+version: '3'
+
+vars:
+  APP_DIR: app
+
+tasks:
+  default:
+    desc: 列出可用任务
+    cmds:
+      - task --list
+
+  install:
+    desc: 安装 app 依赖
+    dir: '{{.APP_DIR}}'
+    cmds:
+      - npm install
+
+  build:
+    desc: 构建 Electron 应用
+    dir: '{{.APP_DIR}}'
+    cmds:
+      - npm run build
+
+  dev:
+    desc: 启动开发模式（watch + electron）
+    dir: '{{.APP_DIR}}'
+    cmds:
+      - npm run dev
+
+  start:
+    desc: 构建并启动应用
+    dir: '{{.APP_DIR}}'
+    cmds:
+      - npm run start
+
+  check:
+    desc: 快速检查（仅构建）
+    deps: [build]
+    cmds:
+      - echo "check done"
